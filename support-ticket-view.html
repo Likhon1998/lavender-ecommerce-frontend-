@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Ticket #TKT-201 - Elegant Shop</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== EMBEDDED STYLES (from style.css) ===== */
+        
+        /* ===== CUSTOM VARIABLES ===== */
+        :root {
+            --color-primary: #9370DB;
+            --color-secondary: #DDA0DD;
+            --color-dark: #2C3E50;
+            --color-text: #4A5568;
+            --color-light-text: #718096;
+            --color-border: #E2E8F0;
+            --font-primary: 'Poppins', sans-serif;
+            --font-display: 'Playfair Display', serif;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        /* ===== GLOBAL STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: #FAFAFA;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            color: var(--color-dark);
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ===== ANIMATED BACKGROUND ===== */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #FAFAFA 0%, #F0F0F0 100%);
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape-1 { width: 400px; height: 400px; background: linear-gradient(135deg, #9370DB 0%, #DDA0DD 100%); top: -100px; left: -100px; animation-delay: 0s; }
+        .shape-2 { width: 350px; height: 350px; background: linear-gradient(135deg, #FFE4E1 0%, #FFC0CB 100%); top: 50%; right: -100px; animation-delay: 5s; }
+        .shape-3 { width: 300px; height: 300px; background: linear-gradient(135deg, #E6E6FA 0%, #DDA0DD 100%); bottom: -100px; left: 30%; animation-delay: 10s; }
+        .shape-4 { width: 250px; height: 250px; background: linear-gradient(135deg, #FFDAB9 0%, #FFF8DC 100%); top: 30%; left: 50%; animation-delay: 15s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, 50px) scale(1.1); }
+            50% { transform: translate(100px, -50px) scale(0.9); }
+            75% { transform: translate(-50px, 100px) scale(1.05); }
+        }
+
+        /* ===== GLASS EFFECT ===== */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .glass-dropdown {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(147, 112, 219, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(147, 112, 219, 0.6); }
+        }
+
+        .animate-fade-in { animation: fadeIn 0.8s ease forwards; opacity: 0; }
+        .pulse-animation { animation: pulse 2s infinite; }
+
+        /* ===== HEADER TOP ===== */
+        .header-top {
+            background: linear-gradient(135deg, #FFE4E1 0%, #E6E6FA 100%);
+            border-bottom: 1px solid rgba(147, 112, 219, 0.1);
+            font-size: 12px;
+        }
+
+        .top-info span, .top-links a {
+            color: var(--color-text);
+            font-size: 12px;
+            transition: var(--transition);
+        }
+
+        .top-links a:hover {
+            color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .brand-text {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .brand-accent {
+            color: var(--color-primary);
+        }
+
+        .nav-link {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text);
+            padding: 0.5rem 1rem !important;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 70%;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--color-primary);
+        }
+
+        .dropdown-menu {
+            border: none;
+            border-radius: 12px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-item {
+            font-size: 13px;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background: linear-gradient(135deg, #E6E6FA 0%, #DDA0DD 100%);
+            color: var(--color-primary);
+            transform: translateX(5px);
+        }
+
+        /* ===== NAVBAR ACTIONS ===== */
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 0.5rem 2.5rem 0.5rem 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: 25px;
+            font-size: 12px;
+            width: 200px;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(147, 112, 219, 0.1);
+            width: 250px;
+            background: white;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-light-text);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--color-primary);
+        }
+
+        .btn-icon {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #E6E6FA 0%, #DDA0DD 100%);
+            border-radius: 50%;
+            color: var(--color-primary);
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .btn-icon:hover {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(147, 112, 219, 0.4);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pulse-badge {
+            animation: pulse 2s infinite;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            font-size: 13px;
+            font-weight: 500;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            transition: var(--transition);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(147, 112, 219, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(147, 112, 219, 0.5);
+            background: linear-gradient(135deg, #8B5FD1 0%, #D896D8 100%);
+            color: white;
+        }
+
+        .btn-glow {
+            animation: glow 2s infinite;
+        }
+        
+        .btn-sm {
+            padding: 0.4rem 1rem;
+            font-size: 12px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--color-dark);
+            color: #CBD5E0;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(147, 112, 219, 0.5), transparent);
+        }
+
+        .footer-main {
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-widget {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+        }
+
+        .footer-text {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #CBD5E0;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: white;
+            margin-right: 0.5rem;
+            transition: var(--transition);
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-icon:hover::before {
+            opacity: 1;
+        }
+
+        .social-icon i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(147, 112, 219, 0.4);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: #CBD5E0;
+            transition: var(--transition);
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-primary);
+            padding-left: 15px;
+        }
+
+        .footer-links a:hover::before {
+            width: 8px;
+        }
+
+        .footer-contact {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-contact li {
+            font-size: 13px;
+            color: #CBD5E0;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: start;
+            transition: var(--transition);
+        }
+
+        .footer-contact li:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-contact i {
+            color: var(--color-primary);
+            margin-right: 0.8rem;
+            margin-top: 0.2rem;
+            font-size: 14px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 0;
+        }
+
+        .copyright-text {
+            font-size: 12px;
+            color: #CBD5E0;
+            margin: 0;
+        }
+
+        .payment-methods {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+
+        .payment-icon {
+            height: 24px;
+            opacity: 0.6;
+            transition: var(--transition);
+            border-radius: 4px;
+        }
+
+        .payment-icon:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 5px 20px rgba(147, 112, 219, 0.4);
+            z-index: 1000;
+            transition: var(--transition);
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .scroll-to-top.show {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(147, 112, 219, 0.5);
+        }
+
+        /* ===== RESPONSIVE (from style.css) ===== */
+        @media (max-width: 991px) {
+            .navbar-actions {
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .search-input {
+                width: 100%;
+            }
+            
+            .search-input:focus {
+                width: 100%;
+            }
+            
+            .payment-methods {
+                justify-content: center;
+                margin-top: 1rem;
+            }
+        }
+        
+        /* ===== BREADCRUMB (from shop.css) ===== */
+        .breadcrumb-section {
+            background: transparent;
+            padding-top: 2rem;
+        }
+        .breadcrumb {
+            background: transparent;
+            padding: 0;
+        }
+        .breadcrumb-item a {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .breadcrumb-item a:hover {
+            color: var(--color-primary);
+        }
+        .breadcrumb-item.active {
+            color: var(--color-primary);
+        }
+        .breadcrumb-item + .breadcrumb-item::before {
+            color: var(--color-light-text);
+        }
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ===== ACCOUNT PAGE SPECIFIC STYLES ===== */
+        .account-section {
+            padding: 3rem 0;
+        }
+        
+        .account-sidebar {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            height: 100%;
+        }
+        
+        .account-sidebar .user-profile {
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .account-sidebar .user-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            object-fit: cover;
+            border: 4px solid var(--color-primary);
+            padding: 3px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .account-sidebar .user-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 0.25rem;
+        }
+        
+        .account-sidebar .user-email {
+            font-size: 13px;
+            color: var(--color-light-text);
+        }
+        
+        .account-nav .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.2rem;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text);
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .account-nav .nav-link i {
+            width: 20px;
+            margin-right: 0.8rem;
+            color: var(--color-light-text);
+            transition: var(--transition);
+        }
+        
+        .account-nav .nav-link:hover {
+            background: linear-gradient(135deg, #E6E6FA 0%, #DDA0DD 100%);
+            color: var(--color-primary);
+        }
+        
+        .account-nav .nav-link:hover i {
+            color: var(--color-primary);
+        }
+        
+        .account-nav .nav-link.active {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(147, 112, 219, 0.3);
+        }
+        
+        .account-nav .nav-link.active i {
+            color: white;
+        }
+        
+        .account-nav .nav-link.logout {
+            color: #FF6B6B;
+        }
+        .account-nav .nav-link.logout:hover {
+            background: #FFF0F0;
+            color: #FF4747;
+        }
+        .account-nav .nav-link.logout i {
+            color: #FF6B6B;
+        }
+        .account-nav .nav-link.logout:hover i {
+            color: #FF4747;
+        }
+        
+        .account-content {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .account-content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .account-content-header h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+        .account-content-header .badge {
+            font-size: 14px;
+        }
+        
+        /* Ticket Chat */
+        .ticket-chat-box {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+        
+        .ticket-message {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .ticket-message .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        
+        .ticket-message .message-content {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            box-shadow: var(--shadow-sm);
+            max-width: 80%;
+        }
+        
+        .ticket-message .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .ticket-message .message-header .name {
+            font-weight: 600;
+            color: var(--color-dark);
+        }
+        
+        .ticket-message .message-header .time {
+            font-size: 11px;
+            color: var(--color-light-text);
+        }
+        
+        .ticket-message .message-text {
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        
+        /* User Message */
+        .ticket-message.user {
+            justify-content: flex-end;
+        }
+        .ticket-message.user .avatar {
+            margin-right: 0;
+            margin-left: 1rem;
+            order: 2;
+        }
+        .ticket-message.user .message-content {
+            background: linear-gradient(135deg, #E6E6FA 0%, #DDA0DD 100%);
+            order: 1;
+        }
+        
+        /* Staff Message */
+        .ticket-message.staff .message-header .name {
+            color: var(--color-primary);
+        }
+
+        /* Reply Form */
+        .reply-form .form-control {
+            border-radius: 10px;
+            font-size: 14px;
+            border: 1px solid var(--color-border);
+        }
+        .reply-form .form-control:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(147, 112, 219, 0.1);
+        }
+        
+
+        @media (max-width: 991px) {
+            .account-sidebar {
+                margin-bottom: 1.5rem;
+            }
+            .page-title {
+                font-size: 24px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="animated-bg">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+    </div>
+
+    <header class="header-top">
+        <div class="container">
+            <div class="row align-items-center py-2">
+                <div class="col-md-6">
+                    <div class="top-info">
+                        <span class="me-3 animate-fade-in"><i class="fas fa-phone-alt me-1"></i> +1 234 567 8900</span>
+                        <span class="animate-fade-in" style="animation-delay: 0.1s;"><i class="fas fa-envelope me-1"></i> info@elegantshop.com</span>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="top-links">
+                        <a href="account-dashboard.html" class="me-3 animate-fade-in" style="animation-delay: 0.2s;"><i class="fas fa-user me-1"></i> Account</a>
+                        <a href="wishlist.html" class="me-3 animate-fade-in" style="animation-delay: 0.3s;"><i class="fas fa-heart me-1"></i> Wishlist</a>
+                        <a href="support-tickets.html" class="me-3 animate-fade-in" style="animation-delay: 0.4s;"><i class="fas fa-headset me-1"></i> Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top glass-effect">
+        <div class="container">
+            <a class="navbar-brand pulse-animation" href="index.html">
+                <span class="brand-text">Elegant<span class="brand-accent">Shop</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu glass-dropdown">
+                            <li><a class="dropdown-item" href="category.html"><i class="fas fa-tshirt me-2"></i>Fashion</a></li>
+                            <li><a class="dropdown-item" href="category.html"><i class="fas fa-laptop me-2"></i>Electronics</a></li>
+                            <li><a class="dropdown-item" href="category.html"><i class="fas fa-home me-2"></i>Home & Garden</a></li>
+                            <li><a class="dropdown-item" href="category.html"><i class="fas fa-spa me-2"></i>Beauty</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="campaigns.html">Campaigns</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="navbar-actions">
+                    <div class="search-box me-3">
+                        <input type="text" class="form-control search-input" placeholder="Search products...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    <a href="cart.html" class="btn-icon position-relative me-2 cart-icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge pulse-badge">3</span>
+                    </a>
+                    <a href="login.html" class="btn btn-primary btn-sm btn-glow">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="page-title">My Account</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="account-dashboard.html">Account</a></li>
+                            <li class="breadcrumb-item"><a href="support-tickets.html">Support Tickets</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">#TKT-201</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="account-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="account-sidebar glass-card">
+                        <div class="user-profile">
+                            <img src="https://picsum.photos/100/100?random=1" alt="User Avatar" class="user-avatar">
+                            <h5 class="user-name">Md. Shahidul Islam</h5>
+                            <p class="user-email">shahidul@example.com</p>
+                        </div>
+                        <nav class="account-nav nav flex-column">
+                            <a class="nav-link" href="account-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                            <a class="nav-link" href="account-orders.html"><i class="fas fa-box-open"></i> My Orders</a>
+                            <a class="nav-link" href="account-profile.html"><i class="fas fa-user-edit"></i> Profile Settings</a>
+                            <a class="nav-link" href="account-addresses.html"><i class="fas fa-map-marker-alt"></i> My Addresses</a>
+                            <a class="nav-link" href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+                            <a class="nav-link active" href="support-tickets.html"><i class="fas fa-headset"></i> Support Tickets</a>
+                            <a class="nav-link logout" href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </nav>
+                    </div>
+                </div>
+                
+                <div class="col-lg-9">
+                    <div class="account-content glass-card">
+                        <div class="account-content-header">
+                            <h3>Ticket #TKT-201: Issue with Order #E8171</h3>
+                            <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill">Pending</span>
+                        </div>
+                        
+                        <div class="ticket-chat-box">
+                            <div class="ticket-message user">
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="name">Md. Shahidul Islam</span>
+                                        <span class="time">Nov 02, 2025, 10:30 AM</span>
+                                    </div>
+                                    <p class="message-text">
+                                        Hello, my order #E8171 is marked as "Shipped" but the tracking number doesn't seem to be working. Can you please check on this?
+                                    </p>
+                                </div>
+                                <img src="https://picsum.photos/100/100?random=1" alt="User Avatar" class="avatar">
+                            </div>
+                            
+                            <div class="ticket-message staff">
+                                <img src="https://picsum.photos/100/100?random=2" alt="Staff Avatar" class="avatar">
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="name">Jane Doe (Support Staff)</span>
+                                        <span class="time">Nov 02, 2025, 10:45 AM</span>
+                                    </div>
+                                    <p class="message-text">
+                                        Hi Shahidul, thank you for reaching out. I'm sorry for the trouble with the tracking. Let me investigate this for you right away. Please give me a few moments.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <form class_="reply-form">
+                            <div class="mb-3">
+                                <label for="replyMessage" class="form-label h5">Your Reply</label>
+                                <textarea class="form-control" id="replyMessage" rows="5" placeholder="Type your message here..."></textarea>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane me-2"></i>Send Reply</button>
+                                <button type="button" class="btn btn-outline-primary">Mark as Resolved</button>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-main">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-title">About ElegantShop</h4>
+                            <p class="footer-text">Your destination for premium quality products. We curate the finest selection to bring elegance and style to your life.</p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-title">Quick Links</h4>
+                            <ul class="footer-links">
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="shop.html">Shop</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="faq.html">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-title">Customer Care</h4>
+                            <ul class="footer-links">
+                                <li><a href="account-dashboard.html">My Account</a></li>
+                                <li><a href="account-orders.html">Track Order</a></li>
+                                <li><a href="wishlist.html">Wishlist</a></li>
+                                <li><a href="support-tickets.html">Support</a></li>
+                                <li><a href="terms-conditions.html">Terms</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-title">Contact Info</h4>
+                            <ul class="footer-contact">
+                                <li><i class="fas fa-map-marker-alt"></i> 123 Fashion Street, NY 10001</li>
+                                <li><i class="fas fa-phone-alt"></i> +1 234 567 8900</li>
+                                <li><i class="fas fa-envelope"></i> info@elegantshop.com</li>
+                                <li><i class="fas fa-clock"></i> Mon - Fri: 9:00 AM - 6:00 PM</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="copyright-text">© 2024 ElegantShop. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="payment-methods text-md-end">
+                            <img src="https://via.placeholder.com/50x30/CCCCCC/666666?text=VISA" alt="Visa" class="payment-icon">
+                            <img src="https://via.placeholder.com/50x30/CCCCCC/666666?text=MC" alt="Mastercard" class="payment-icon">
+                            <img src="https://via.placeholder.com/50x30/CCCCCC/666666?text=AMEX" alt="Amex" class="payment-icon">
+                            <img src="https://via.placeholder.com/50x30/CCCCCC/666666?text=PP" alt="PayPal" class="payment-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Scroll to Top (from index.html)
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        };
+        scrollToTopBtn.onclick = function() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        };
+    </script>
+</body>
+</html>

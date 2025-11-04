@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success - Elegant Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .success-section {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 0;
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .success-icon i {
+            font-size: 48px;
+            color: white;
+            animation: checkmark 0.8s ease 0.3s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(0deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .success-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .success-message {
+            font-size: 16px;
+            color: var(--color-text);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .order-info-box {
+            background: linear-gradient(135deg, rgba(147, 112, 219, 0.05) 0%, rgba(221, 160, 221, 0.05) 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .order-number {
+            font-size: 14px;
+            color: var(--color-light-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .order-id {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .order-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+
+        .detail-item {
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: var(--color-light-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.3rem;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-dark);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            animation: fadeInUp 0.8s ease 0.7s both;
+        }
+
+        .action-buttons .btn {
+            min-width: 180px;
+        }
+
+        .next-steps {
+            background: #F8F9FA;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: left;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+
+        .next-steps h5 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 1rem;
+        }
+
+        .steps-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .steps-list li {
+            padding: 0.8rem 0;
+            color: var(--color-text);
+            font-size: 14px;
+            display: flex;
+            align-items: start;
+        }
+
+        .steps-list li i {
+            color: var(--color-primary);
+            margin-right: 0.8rem;
+            margin-top: 0.2rem;
+            font-size: 16px;
+        }
+
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--color-primary);
+            opacity: 0;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        .email-notification {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10B981;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 14px;
+            margin: 1rem 0;
+            animation: fadeInUp 0.8s ease 0.9s both;
+        }
+
+        .email-notification i {
+            font-size: 16px;
+        }
+
+        @media (max-width: 767px) {
+            .success-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .success-title {
+                font-size: 24px;
+            }
+
+            .order-id {
+                font-size: 20px;
+            }
+
+            .order-details {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .action-buttons .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+    </div>
+
+    <!-- ===== HEADER / NAVBAR ===== -->
+    <header class="header-top">
+        <div class="container">
+            <div class="row align-items-center py-2">
+                <div class="col-md-6">
+                    <div class="top-info">
+                        <span class="me-3"><i class="fas fa-phone-alt me-1"></i> +1 234 567 8900</span>
+                        <span><i class="fas fa-envelope me-1"></i> info@elegantshop.com</span>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="top-links">
+                        <a href="account-dashboard.html" class="me-3"><i class="fas fa-user me-1"></i> Account</a>
+                        <a href="wishlist.html" class="me-3"><i class="fas fa-heart me-1"></i> Wishlist</a>
+                        <a href="support-tickets.html"><i class="fas fa-headset me-1"></i> Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top glass-effect">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-text">Elegant<span class="brand-accent">Shop</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu glass-dropdown">
+                            <li><a class="dropdown-item" href="category.html"><i class="fas fa-tshirt me-2"></i>Fashion</a></li>
+                            <li><a class="dropdown-item" href="category.html"><i class="fas fa-laptop me-2"></i>Electronics</a></li>
+                            <li><a class="dropdown-item" href="category.html"><i class="fas fa-home me-2"></i>Home & Garden</a></li>
+                            <li><a class="dropdown-item" href="category.html"><i class="fas fa-spa me-2"></i>Beauty</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="campaigns.html">Campaigns</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="navbar-actions">
+                    <div class="search-box me-3">
+                        <input type="text" class="form-control search-input" placeholder="Search products...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    <a href="cart.html" class="btn-icon position-relative me-2">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge">0</span>
+                    </a>
+                    <a href="account-dashboard.html" class="btn btn-primary btn-sm">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== SUCCESS SECTION ===== -->
+    <section class="success-section">
+        <div class="container">
+            <div class="success-card">
+                <div class="confetti-container" id="confettiContainer"></div>
+                
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+
+                <h1 class="success-title">Order Placed Successfully!</h1>
+                <p class="success-message">
+                    Thank you for your purchase. Your order has been received and is being processed.
+                </p>
+
+                <div class="email-notification">
+                    <i class="fas fa-envelope-circle-check"></i>
+                    <span>Confirmation email sent to your inbox</span>
+                </div>
+
+                <div class="order-info-box">
+                    <div class="order-number">Your Order Number</div>
+                    <div class="order-id">#ORD-2024-8A3F9B</div>
+
+                    <div class="order-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Order Date</div>
+                            <div class="detail-value">Nov 4, 2024</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Total Amount</div>
+                            <div class="detail-value">$347.96</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Payment Method</div>
+                            <div class="detail-value">Credit Card</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Est. Delivery</div>
+                            <div class="detail-value">Nov 8-10</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="account-order-details.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-receipt me-2"></i> View Order Details
+                    </a>
+                    <a href="shop.html" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-shopping-bag me-2"></i> Continue Shopping
+                    </a>
+                </div>
+
+                <div class="next-steps">
+                    <h5><i class="fas fa-info-circle me-2"></i> What Happens Next?</h5>
+                    <ul class="steps-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>You'll receive an order confirmation email with your order details</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-box"></i>
+                            <span>We'll send you a shipping confirmation with tracking information once your order ships</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-truck"></i>
+                            <span>Track your order status anytime from your account dashboard</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-headset"></i>
+                            <span>Need help? Our customer support team is available 24/7</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-main">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-title">About ElegantShop</h4>
+                            <p class="footer-text">Your destination for premium quality products. We curate the finest selection to bring elegance and style to your life.</p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-title">Quick Links</h4>
+                            <ul class="footer-links">
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="shop.html">Shop</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="faq.html">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-title">Customer Care</h4>
+                            <ul class="footer-links">
+                                <li><a href="account-dashboard.html">My Account</a></li>
+                                <li><a href="account-orders.html">Track Order</a></li>
+                                <li><a href="wishlist.html">Wishlist</a></li>
+                                <li><a href="support-tickets.html">Support</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-title">Contact Info</h4>
+                            <ul class="footer-contact">
+                                <li><i class="fas fa-map-marker-alt"></i> 123 Fashion Street, NY 10001</li>
+                                <li><i class="fas fa-phone-alt"></i> +1 234 567 8900</li>
+                                <li><i class="fas fa-envelope"></i> info@elegantshop.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="copyright-text">© 2024 ElegantShop. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="payment-methods text-md-end">
+                            <img src="https://via.placeholder.com/50x30/CCCCCC/666666?text=VISA" alt="Visa" class="payment-icon">
+                            <img src="https://via.placeholder.com/50x30/CCCCCC/666666?text=MC" alt="Mastercard" class="payment-icon">
+                            <img src="https://via.placeholder.com/50x30/CCCCCC/666666?text=PP" alt="PayPal" class="payment-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Confetti animation
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#9370DB', '#DDA0DD', '#FFB6C1', '#87CEEB', '#98FB98', '#FFD700'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(confetti);
+            }
+        }
+
+        // Trigger confetti on page load
+        window.addEventListener('load', () => {
+            createConfetti();
+            
+            // Clear cart badge
+            document.querySelector('.cart-badge').textContent = '0';
+        });
+    </script>
+</body>
+</html>

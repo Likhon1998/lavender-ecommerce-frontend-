@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Shop - Modern E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+    </div>
+
+    <!-- ===== HEADER / NAVBAR ===== -->
+    <header class="header-top">
+        <div class="container">
+            <div class="row align-items-center py-2">
+                <div class="col-md-6">
+                    <div class="top-info">
+                        <span class="me-3 animate-fade-in"><i class="fas fa-phone-alt me-1"></i> +1 234 567 8900</span>
+                        <span class="animate-fade-in" style="animation-delay: 0.1s;"><i class="fas fa-envelope me-1"></i> info@elegantshop.com</span>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="top-links">
+                        <a href="account-dashboard.html" class="me-3 animate-fade-in" style="animation-delay: 0.2s;"><i class="fas fa-user me-1"></i> Account</a>
+                        <a href="wishlist.html" class="me-3 animate-fade-in" style="animation-delay: 0.3s;"><i class="fas fa-heart me-1"></i> Wishlist</a>
+                        <a href="support-tickets.html" class="animate-fade-in" style="animation-delay: 0.4s;"><i class="fas fa-headset me-1"></i> Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top glass-effect">
+        <div class="container">
+            <a class="navbar-brand pulse-animation" href="index.html">
+                <span class="brand-text">Elegant<span class="brand-accent">Shop</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu glass-dropdown">
+                            <li><a class="dropdown-item" href="category.html"><i class="fas fa-tshirt me-2"></i>Fashion</a></li>
+                            <li><a class="dropdown-item" href="category.html"><i class="fas fa-laptop me-2"></i>Electronics</a></li>
+                            <li><a class="dropdown-item" href="category.html"><i class="fas fa-home me-2"></i>Home & Garden</a></li>
+                            <li><a class="dropdown-item" href="category.html"><i class="fas fa-spa me-2"></i>Beauty</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="campaigns.html">Campaigns</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="navbar-actions">
+                    <div class="search-box me-3">
+                        <input type="text" class="form-control search-input" placeholder="Search products...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    <a href="cart.html" class="btn-icon position-relative me-2 cart-icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge pulse-badge">3</span>
+                    </a>
+                    <a href="login.html" class="btn btn-primary btn-sm btn-glow">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-section">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="hero-slide hero-gradient-1">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="hero-content slide-in-left">
+                                        <span class="hero-subtitle">New Collection 2024</span>
+                                        <h1 class="hero-title gradient-text">Discover Your Perfect Style</h1>
+                                        <p class="hero-description">Explore our curated selection of premium products with exclusive offers</p>
+                                        <a href="shop.html" class="btn btn-primary btn-lg mt-3 btn-3d">
+                                            Shop Now <i class="fas fa-arrow-right ms-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="hero-image-wrapper">
+                                        <div class="image-glow"></div>
+                                        <img src="https://picsum.photos/600/500?random=1" alt="Hero" class="hero-image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="hero-slide hero-gradient-2">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="hero-content slide-in-left">
+                                        <span class="hero-subtitle">Summer Sale</span>
+                                        <h1 class="hero-title gradient-text">Up to 50% Off</h1>
+                                        <p class="hero-description">Limited time offer on selected items. Don't miss out!</p>
+                                        <a href="campaigns.html" class="btn btn-primary btn-lg mt-3 btn-3d">
+                                            View Offers <i class="fas fa-arrow-right ms-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="hero-image-wrapper">
+                                        <div class="image-glow"></div>
+                                        <img src="https://picsum.photos/600/500?random=2" alt="Hero" class="hero-image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="hero-slide hero-gradient-3">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="hero-content slide-in-left">
+                                        <span class="hero-subtitle">Premium Quality</span>
+                                        <h1 class="hero-title gradient-text">Elegance Meets Comfort</h1>
+                                        <p class="hero-description">Handpicked products that combine style with functionality</p>
+                                        <a href="shop.html" class="btn btn-primary btn-lg mt-3 btn-3d">
+                                            Explore <i class="fas fa-arrow-right ms-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="hero-image-wrapper">
+                                        <div class="image-glow"></div>
+                                        <img src="https://picsum.photos/600/500?random=3" alt="Hero" class="hero-image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon modern-carousel-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon modern-carousel-icon"></span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES SECTION ===== -->
+    <section class="features-section py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3 col-sm-6">
+                    <div class="feature-card glass-card" data-tilt>
+                        <div class="feature-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                            <div class="icon-ripple"></div>
+                        </div>
+                        <h5 class="feature-title">Free Shipping</h5>
+                        <p class="feature-text">On orders over $50</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="feature-card glass-card" data-tilt>
+                        <div class="feature-icon">
+                            <i class="fas fa-undo-alt"></i>
+                            <div class="icon-ripple"></div>
+                        </div>
+                        <h5 class="feature-title">Easy Returns</h5>
+                        <p class="feature-text">30-day return policy</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="feature-card glass-card" data-tilt>
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                            <div class="icon-ripple"></div>
+                        </div>
+                        <h5 class="feature-title">Secure Payment</h5>
+                        <p class="feature-text">100% secure transactions</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="feature-card glass-card" data-tilt>
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                            <div class="icon-ripple"></div>
+                        </div>
+                        <h5 class="feature-title">24/7 Support</h5>
+                        <p class="feature-text">Dedicated customer care</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURED PRODUCTS ===== -->
+    <section class="products-section py-5">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <span class="section-subtitle reveal-text">Trending Now</span>
+                <h2 class="section-title reveal-text">Featured Products</h2>
+                <p class="section-description reveal-text">Discover our handpicked selection of premium items</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product-card modern-card">
+                        <div class="product-badge badge-new">New</div>
+                        <div class="product-image">
+                            <div class="image-overlay-gradient"></div>
+                            <img src="https://picsum.photos/300/300?random=10" alt="Product">
+                            <div class="product-overlay">
+                                <a href="product.html" class="btn btn-sm btn-light me-2 btn-float"><i class="fas fa-eye"></i></a>
+                                <button class="btn btn-sm btn-light btn-float"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Fashion</span>
+                            <h5 class="product-title">Elegant Summer Dress</h5>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(48)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price">$89.99</span>
+                                <span class="old-price">$129.99</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 mt-2 add-to-cart btn-ripple">
+                                <i class="fas fa-shopping-bag me-1"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product-card modern-card">
+                        <div class="product-badge badge-sale">Sale</div>
+                        <div class="product-image">
+                            <div class="image-overlay-gradient"></div>
+                            <img src="https://picsum.photos/300/300?random=11" alt="Product">
+                            <div class="product-overlay">
+                                <a href="product.html" class="btn btn-sm btn-light me-2 btn-float"><i class="fas fa-eye"></i></a>
+                                <button class="btn btn-sm btn-light btn-float"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Electronics</span>
+                            <h5 class="product-title">Wireless Headphones</h5>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>(127)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price">$149.99</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 mt-2 add-to-cart btn-ripple">
+                                <i class="fas fa-shopping-bag me-1"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product-card modern-card">
+                        <div class="product-image">
+                            <div class="image-overlay-gradient"></div>
+                            <img src="https://picsum.photos/300/300?random=12" alt="Product">
+                            <div class="product-overlay">
+                                <a href="product.html" class="btn btn-sm btn-light me-2 btn-float"><i class="fas fa-eye"></i></a>
+                                <button class="btn btn-sm btn-light btn-float"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Home & Garden</span>
+                            <h5 class="product-title">Ceramic Vase Set</h5>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>(34)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price">$59.99</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 mt-2 add-to-cart btn-ripple">
+                                <i class="fas fa-shopping-bag me-1"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product-card modern-card">
+                        <div class="product-badge badge-hot">Hot</div>
+                        <div class="product-image">
+                            <div class="image-overlay-gradient"></div>
+                            <img src="https://picsum.photos/300/300?random=13" alt="Product">
+                            <div class="product-overlay">
+                                <a href="product.html" class="btn btn-sm btn-light me-2 btn-float"><i class="fas fa-eye"></i></a>
+                                <button class="btn btn-sm btn-light btn-float"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Beauty</span>
+                            <h5 class="product-title">Organic Skincare Kit</h5>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>(89)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price">$79.99</span>
+                                <span class="old-price">$99.99</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 mt-2 add-to-cart btn-ripple">
+                                <i class="fas fa-shopping-bag me-1"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product-card modern-card">
+                        <div class="product-image">
+                            <div class="image-overlay-gradient"></div>
+                            <img src="https://picsum.photos/300/300?random=14" alt="Product">
+                            <div class="product-overlay">
+                                <a href="product.html" class="btn btn-sm btn-light me-2 btn-float"><i class="fas fa-eye"></i></a>
+                                <button class="btn btn-sm btn-light btn-float"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Fashion</span>
+                            <h5 class="product-title">Leather Handbag</h5>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(62)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price">$199.99</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 mt-2 add-to-cart btn-ripple">
+                                <i class="fas fa-shopping-bag me-1"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product-card modern-card">
+                        <div class="product-badge badge-sale">-30%</div>
+                        <div class="product-image">
+                            <div class="image-overlay-gradient"></div>
+                            <img src="https://picsum.photos/300/300?random=15" alt="Product">
+                            <div class="product-overlay">
+                                <a href="product.html" class="btn btn-sm btn-light me-2 btn-float"><i class="fas fa-eye"></i></a>
+                                <button class="btn btn-sm btn-light btn-float"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Electronics</span>
+                            <h5 class="product-title">Smart Watch Pro</h5>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>(156)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price">$279.99</span>
+                                <span class="old-price">$399.99</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 mt-2 add-to-cart btn-ripple">
+                                <i class="fas fa-shopping-bag me-1"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product-card modern-card">
+                        <div class="product-image">
+                            <div class="image-overlay-gradient"></div>
+                            <img src="https://picsum.photos/300/300?random=16" alt="Product">
+                            <div class="product-overlay">
+                                <a href="product.html" class="btn btn-sm btn-light me-2 btn-float"><i class="fas fa-eye"></i></a>
+                                <button class="btn btn-sm btn-light btn-float"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Home & Garden</span>
+                            <h5 class="product-title">Scented Candle Set</h5>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>(41)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price">$39.99</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 mt-2 add-to-cart btn-ripple">
+                                <i class="fas fa-shopping-bag me-1"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product-card modern-card">
+                        <div class="product-badge badge-new">New</div>
+                        <div class="product-image">
+                            <div class="image-overlay-gradient"></div>
+                            <img src="https://picsum.photos/300/300?random=17" alt="Product">
+                            <div class="product-overlay">
+                                <a href="product.html" class="btn btn-sm btn-light me-2 btn-float"><i class="fas fa-eye"></i></a>
+                                <button class="btn btn-sm btn-light btn-float"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Beauty</span>
+                            <h5 class="product-title">Perfume Collection</h5>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(73)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price">$129.99</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 mt-2 add-to-cart btn-ripple">
+                                <i class="fas fa-shopping-bag me-1"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="shop.html" class="btn btn-outline-primary btn-lg btn-glow-outline">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BANNER SECTION ===== -->
+    <section class="banner-section py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="promo-banner glass-card promo-gradient-1">
+                        <div class="promo-content">
+                            <span class="promo-subtitle">Limited Offer</span>
+                            <h3 class="promo-title">Summer Collection</h3>
+                            <p class="promo-text">Get up to 40% off on selected items</p>
+                            <a href="campaigns.html" class="btn btn-dark btn-sm mt-2 btn-3d">Shop Now</a>
+                        </div>
+                        <img src="https://picsum.photos/250/250?random=20" alt="Promo" class="promo-image">
+                        <div class="promo-glow"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="promo-banner glass-card promo-gradient-2">
+                        <div class="promo-content">
+                            <span class="promo-subtitle">New Arrivals</span>
+                            <h3 class="promo-title">Trending Styles</h3>
+                            <p class="promo-text">Discover the latest fashion trends</p>
+                            <a href="shop.html" class="btn btn-dark btn-sm mt-2 btn-3d">Explore</a>
+                        </div>
+                        <img src="https://picsum.photos/250/250?random=21" alt="Promo" class="promo-image">
+                        <div class="promo-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWSLETTER SECTION ===== -->
+    <section class="newsletter-section py-5">
+        <div class="container">
+            <div class="newsletter-box glass-card">
+                <div class="newsletter-glow"></div>
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="newsletter-content">
+                            <i class="fas fa-envelope-open newsletter-icon"></i>
+                            <h3 class="newsletter-title">Subscribe to Our Newsletter</h3>
+                            <p class="newsletter-text">Get the latest updates on new products and exclusive offers</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <form class="newsletter-form">
+                            <div class="input-group modern-input">
+                                <input type="email" class="form-control" placeholder="Enter your email address">
+                                <button class="btn btn-primary" type="submit">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-main">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-title">About ElegantShop</h4>
+                            <p class="footer-text">Your destination for premium quality products. We curate the finest selection to bring elegance and style to your life.</p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-title">Quick Links</h4>
+                            <ul class="footer-links">
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="shop.html">Shop</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="faq.html">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-title">Customer Care</h4>
+                            <ul class="footer-links">
+                                <li><a href="account-dashboard.html">My Account</a></li>
+                                <li><a href="account-orders.html">Track Order</a></li>
+                                <li><a href="wishlist.html">Wishlist</a></li>
+                                <li><a href="support-tickets.html">Support</a></li>
+                                <li><a href="terms-conditions.html">Terms</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-title">Contact Info</h4>
+                            <ul class="footer-contact">
+                                <li><i class="fas fa-map-marker-alt"></i> 123 Fashion Street, NY 10001</li>
+                                <li><i class="fas fa-phone-alt"></i> +1 234 567 8900</li>
+                                <li><i class="fas fa-envelope"></i> info@elegantshop.com</li>
+                                <li><i class="fas fa-clock"></i> Mon - Fri: 9:00 AM - 6:00 PM</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="copyright-text">© 2024 ElegantShop. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="payment-methods text-md-end">
+                            <img src="https://via.placeholder.com/50x30/CCCCCC/666666?text=VISA" alt="Visa" class="payment-icon">
+                            <img src="https://via.placeholder.com/50x30/CCCCCC/666666?text=MC" alt="Mastercard" class="payment-icon">
+                            <img src="https://via.placeholder.com/50x30/CCCCCC/666666?text=AMEX" alt="Amex" class="payment-icon">
+                            <img src="https://via.placeholder.com/50x30/CCCCCC/666666?text=PP" alt="PayPal" class="payment-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
