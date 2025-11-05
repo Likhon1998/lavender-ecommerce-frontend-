@@ -1,0 +1,741 @@
+/* ===== ACCOUNT PAGE SPECIFIC STYLES - START ===== */
+.account-section {
+    padding: 3rem 0;
+}
+
+.account-sidebar {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    height: 100%;
+}
+
+.account-sidebar .user-profile {
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.account-sidebar .user-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    object-fit: cover;
+    border: 4px solid var(--color-primary);
+    padding: 3px;
+    box-shadow: var(--shadow-sm);
+}
+
+.account-sidebar .user-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: 0.25rem;
+}
+
+.account-sidebar .user-email {
+    font-size: 13px;
+    color: var(--color-light-text);
+}
+
+.account-nav .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text);
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    transition: var(--transition);
+}
+
+.account-nav .nav-link i {
+    width: 20px;
+    margin-right: 0.8rem;
+    color: var(--color-light-text);
+    transition: var(--transition);
+}
+
+.account-nav .nav-link:hover {
+    background: linear-gradient(135deg, #E6E6FA 0%, #DDA0DD 100%);
+    color: var(--color-primary);
+}
+
+.account-nav .nav-link:hover i {
+    color: var(--color-primary);
+}
+
+.account-nav .nav-link.active {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(147, 112, 219, 0.3);
+}
+
+.account-nav .nav-link.active i {
+    color: white;
+}
+
+.account-nav .nav-link.logout {
+    color: #FF6B6B;
+}
+.account-nav .nav-link.logout:hover {
+    background: #FFF0F0;
+    color: #FF4747;
+}
+.account-nav .nav-link.logout i {
+    color: #FF6B6B;
+}
+.account-nav .nav-link.logout:hover i {
+    color: #FF4747;
+}
+
+.account-content {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.account-content h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-dark);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- DASHBOARD CARD STYLES (from account-dashboard.html) --- */
+
+.dashboard-card {
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    color: white;
+    transition: var(--transition);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.dashboard-card .card-icon {
+    font-size: 32px;
+    opacity: 0.8;
+}
+
+.dashboard-card .card-title {
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+    color: white;
+}
+
+.dashboard-card .card-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+}
+
+.bg-card-1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.bg-card-2 {
+    background: linear-gradient(135deg, #38f9d7 0%, #43e97b 100%);
+}
+.bg-card-3 {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
+
+.recent-orders table {
+    font-size: 13px;
+}
+.recent-orders th {
+    font-weight: 600;
+    color: var(--color-dark);
+}
+.recent-orders .badge {
+    font-size: 11px;
+    padding: 0.4em 0.7em;
+}
+
+/* --- ORDERS LIST (from account-orders.html) --- */
+
+.orders-table {
+    font-size: 13px;
+}
+.orders-table thead th {
+    font-weight: 600;
+    color: var(--color-dark);
+    background-color: #f8f9fa;
+}
+.orders-table .badge {
+    font-size: 11px;
+    padding: 0.4em 0.7em;
+}
+.orders-table tbody tr:hover {
+    background-color: #fdfcff;
+}
+
+/* --- ORDER DETAILS (from account-order-details.html) --- */
+
+.account-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.account-content-header h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+.account-content-header .badge {
+    font-size: 14px;
+}
+
+/* Order Tracker */
+.order-tracker {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    background-color: #f8f9fa;
+}
+.order-tracker-step {
+    text-align: center;
+    flex-grow: 1;
+    position: relative;
+}
+.order-tracker-step-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--color-border);
+    color: var(--color-light-text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+}
+.order-tracker-step-label {
+    font-size: 12px;
+    font-weight: 500;
+}
+.order-tracker-step.completed .order-tracker-step-icon {
+    background-color: var(--color-primary);
+    color: white;
+}
+.order-tracker-step.completed .order-tracker-step-label {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+.order-tracker-step::before { /* Connector line */
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: -50%;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-border);
+    z-index: 1;
+}
+.order-tracker-step:first-child::before {
+    display: none;
+}
+.order-tracker-step.completed::before {
+    background-color: var(--color-primary);
+}
+
+/* Address Card (reused from checkout.css/addresses.html) */
+.address-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    height: 100%;
+}
+.address-card h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: 0.75rem;
+}
+.address-card p {
+    font-size: 13px;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+    line-height: 1.7;
+}
+
+/* Order Items Table */
+.order-items-table img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.order-items-table .product-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-dark);
+}
+.order-items-table .product-title:hover {
+    color: var(--color-primary);
+}
+.order-items-table tbody td {
+    vertical-align: middle;
+}
+
+.order-summary {
+    list-style: none;
+    padding: 0;
+    font-size: 14px;
+}
+.order-summary li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+.order-summary li span:last-child {
+    font-weight: 600;
+    color: var(--color-dark);
+}
+.order-summary li.total {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-dark);
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+}
+.order-summary li.total span:last-child {
+    color: var(--color-primary);
+}
+
+/* --- ADDRESSES MANAGEMENT (from account-addresses.html) --- */
+
+.address-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+}
+
+.address-card .badge {
+    font-size: 11px;
+    padding: 0.4em 0.7em;
+    font-weight: 600;
+}
+
+.address-card h5 {
+    margin-top: 0.5rem;
+}
+
+.address-card .address-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.address-card .address-actions .btn-link {
+    font-size: 12px;
+    font-weight: 600;
+}
+.address-card .address-actions .btn-link i {
+    margin-right: 0.25rem;
+}
+.address-card .address-actions .text-danger {
+    color: #FF6B6B !important;
+}
+.address-card .address-actions .text-danger:hover {
+    color: #FF4747 !important;
+}
+
+/* --- PROFILE SETTINGS (from account-profile.html) --- */
+
+.form-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-dark);
+}
+.form-control {
+    border-radius: 10px;
+    font-size: 14px;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--color-border);
+}
+.form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(147, 112, 219, 0.1);
+}
+.form-control::placeholder {
+    color: var(--color-light-text);
+}
+
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--color-light-text);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.password-toggle:hover {
+    color: var(--color-primary);
+}
+
+/* --- Responsive Adjustments --- */
+
+@media (max-width: 991px) {
+    .account-sidebar {
+        margin-bottom: 1.5rem;
+    }
+    .page-title {
+        font-size: 24px;
+    }
+}
+@media (max-width: 767px) {
+    .order-tracker-step-label {
+        font-size: 10px;
+    }
+    .order-tracker-step-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    .order-tracker-step::before {
+        top: 20px;
+    }
+}
+
+/* ===== ACCOUNT PAGE SPECIFIC STYLES - END ===== */
+
+/* ===== WISHLIST PAGE SPECIFIC STYLES ===== */
+.wishlist-section {
+    padding: 3rem 0;
+}
+
+.wishlist-table {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.wishlist-table thead {
+    background: linear-gradient(135deg, #E6E6FA 0%, #DDA0DD 100%);
+    color: var(--color-dark);
+    font-family: var(--font-display);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.wishlist-table th {
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+}
+
+.wishlist-table tbody tr {
+    background: white;
+    border-bottom: 1px solid var(--color-border);
+    transition: var(--transition);
+}
+
+.wishlist-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.wishlist-table tbody tr:hover {
+    background: #FAFAFA;
+    transform: scale(1.01);
+    box-shadow: var(--shadow-sm);
+}
+
+.wishlist-table td {
+    padding: 1.5rem;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+}
+
+.product-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    margin-right: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.product-item .product-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-item .product-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-dark);
+    text-decoration: none;
+    margin-bottom: 0.25rem;
+}
+
+.product-item .product-title:hover {
+    color: var(--color-primary);
+}
+
+.product-item .product-category {
+    font-size: 12px;
+    color: var(--color-light-text);
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.stock-status {
+    font-weight: 600;
+}
+
+.stock-status.in-stock {
+    color: #10B981;
+}
+
+.stock-status.out-of-stock {
+    color: #FF6B6B;
+}
+
+.btn-remove {
+    font-size: 16px;
+    color: var(--color-light-text);
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    transition: var(--transition);
+}
+
+.btn-remove:hover {
+    color: #FF6B6B;
+    transform: scale(1.2);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-state i {
+    font-size: 64px;
+    color: var(--color-light-text);
+    margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+    font-size: 24px;
+    color: var(--color-dark);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: var(--color-light-text);
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 991px) {
+    .wishlist-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .wishlist-table thead {
+        display: none;
+    }
+    .wishlist-table tbody, .wishlist-table tr, .wishlist-table td {
+        display: block;
+        width: 100%;
+    }
+    .wishlist-table tr {
+        margin-bottom: 1rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--color-border);
+    }
+    .wishlist-table td {
+        padding: 1rem;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+        border-bottom: 1px solid var(--color-border);
+    }
+    .wishlist-table td:last-child {
+        border-bottom: none;
+    }
+    .wishlist-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        width: 40%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: var(--color-dark);
+    }
+    .product-item {
+        justify-content: flex-end;
+    }
+    .product-item img {
+        margin-right: 0;
+        margin-left: 1.5rem; /* RTL for flex-end */
+    }
+    .wishlist-table .btn-primary {
+        width: 100%;
+    }
+}
+
+/* Tickets Table */
+.tickets-table {
+    font-size: 13px;
+}
+.tickets-table thead th {
+    font-weight: 600;
+    color: var(--color-dark);
+    background-color: #f8f9fa;
+}
+.tickets-table .badge {
+    font-size: 11px;
+    padding: 0.4em 0.7em;
+}
+.tickets-table tbody tr:hover {
+    background-color: #fdfcff;
+}
+.ticket-subject {
+    font-weight: 600;
+    color: var(--color-dark);
+    font-size: 14px;
+}
+.ticket-subject:hover {
+    color: var(--color-primary);
+}
+
+@media (max-width: 991px) {
+    .account-sidebar {
+        margin-bottom: 1.5rem;
+    }
+    .page-title {
+        font-size: 24px;
+    }
+}
+
+/* Account Content Header Badge - Styling for the "Pending/Closed" status */
+.account-content-header .badge {
+    font-size: 14px;
+}
+
+/* Ticket Chat Box Container */
+.ticket-chat-box {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+}
+
+/* Individual Message Layout */
+.ticket-message {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.ticket-message .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.ticket-message .message-content {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+    max-width: 80%;
+}
+
+.ticket-message .message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.ticket-message .message-header .name {
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.ticket-message .message-header .time {
+    font-size: 11px;
+    color: var(--color-light-text);
+}
+
+.ticket-message .message-text {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* User Message Specific Styling (Right Aligned, Gradient Background) */
+.ticket-message.user {
+    justify-content: flex-end;
+}
+.ticket-message.user .avatar {
+    margin-right: 0;
+    margin-left: 1rem;
+    order: 2; /* Moves avatar to the right */
+}
+.ticket-message.user .message-content {
+    background: linear-gradient(135deg, #E6E6FA 0%, #DDA0DD 100%);
+    order: 1; /* Moves content to the left */
+}
+
+/* Staff Message Specific Styling (Primary Color Name) */
+.ticket-message.staff .message-header .name {
+    color: var(--color-primary);
+}
+
+/* Reply Form Textarea Focus Styling */
+.reply-form .form-control {
+    border-radius: 10px;
+    font-size: 14px;
+    border: 1px solid var(--color-border);
+}
+.reply-form .form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(147, 112, 219, 0.1);
+}
