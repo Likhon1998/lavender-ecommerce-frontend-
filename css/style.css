@@ -2202,6 +2202,9 @@ img {
 /* ===== CART PAGE SPECIFIC STYLES - START ===== */
 
 /* Cart Header */
+/* ===== CART PAGE SPECIFIC STYLES ===== */
+
+/* Cart Header */
 .cart-header {
     animation: fadeIn 0.6s ease;
 }
@@ -2695,6 +2698,17 @@ img {
 }
 
 /* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @keyframes slideInLeft {
     from {
         opacity: 0;
@@ -2715,6 +2729,18 @@ img {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(50px, 50px) scale(1.1); }
+    50% { transform: translate(100px, -50px) scale(0.9); }
+    75% { transform: translate(-50px, 100px) scale(1.05); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 /* Loading State */
@@ -2843,11 +2869,6 @@ img {
     }
 }
 
-/* Dark Mode Support (Optional) */
-@media (prefers-color-scheme: dark) {
-    /* Add dark mode styles if needed */
-}
-
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
     .cart-item,
@@ -2861,8 +2882,6 @@ img {
         display: none;
     }
 }
-
-/* ===== END OF CART STYLES ===== */
 
 
 /* ===== CHECKOUT PAGE SPECIFIC STYLES - START ===== */

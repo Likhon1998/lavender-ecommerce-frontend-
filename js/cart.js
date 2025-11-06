@@ -1,505 +1,419 @@
-// ===== CART PAGE SCRIPTS =====
+// ===== CART PAGE JAVASCRIPT =====
 
-// Cart data (in real app, this would come from backend/localStorage)
+// Cart state management
 let cartData = {
     items: [
-        { id: 1, name: 'Premium Cotton T-Shirt', price: 49.99, originalPrice: 69.99, quantity: 2, color: 'Black', size: 'M', image: 'https://picsum.photos/150/150?random=50' },
-        { id: 2, name: 'Wireless Headphones', price: 149.99, originalPrice: null, quantity: 1, color: 'Black', size: null, image: 'https://picsum.photos/150/150?random=51' },
-        { id: 3, name: 'Leather Handbag', price: 199.99, originalPrice: null, quantity: 1, color: 'Brown', size: null, image: 'https://picsum.photos/150/150?random=52' }
+        {
+            id: 1,
+            name: 'Premium Cotton T-Shirt',
+            price: 49.99,
+            originalPrice: 69.99,
+            quantity: 2,
+            color: 'Black',
+            size: 'M',
+            image: 'https://picsum.photos/150/150?random=50'
+        },
+        {
+            id: 2,
+            name: 'Wireless Headphones',
+            price: 149.99,
+            quantity: 1,
+            color: 'Black',
+            image: 'https://picsum.photos/150/150?random=51'
+        },
+        {
+            id: 3,
+            name: 'Leather Handbag',
+            price: 199.99,
+            quantity: 1,
+            color: 'Brown',
+            image: 'https://picsum.photos/150/150?random=52'
+        }
     ],
     coupon: null,
-    shippingCost: 0,
-    taxRate: 0.10
+    discountAmount: 0
 };
 
 // Initialize cart on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateCartDisplay();
-    initializeQuantityInputs();
+    updateOrderSummary();
 });
 
-// ===== UPDATE QUANTITY =====
+// Update quantity
 function updateQuantity(itemId, action) {
-    const cartItem = document.querySelector(`[data-item-id="${itemId}"]`);
-    const qtyInput = cartItem.querySelector('.qty-input');
-    let currentQty = parseInt(qtyInput.value);
-    const maxQty = parseInt(qtyInput.getAttribute('max')) || 10;
-
-    if (action === 'increase' && currentQty < maxQty) {
-        currentQty++;
-    } else if (action === 'decrease' && currentQty > 1) {
-        currentQty--;
-    } else if (action === 'increase' && currentQty >= maxQty) {
-        showNotification('Maximum quantity reached', 'info');
-        return;
-    } else if (action === 'decrease' && currentQty <= 1) {
-        return;
-    }
-
-    // Update input value
-    qtyInput.value = currentQty;
-
-    // Update quantity in cart data
     const item = cartData.items.find(i => i.id === itemId);
-    if (item) {
-        item.quantity = currentQty;
+    if (!item) return;
+
+    if (action === 'increase' && item.quantity < 10) {
+        item.quantity++;
+    } else if (action === 'decrease' && item.quantity > 1) {
+        item.quantity--;
     }
 
-    // Update item subtotal
-    const price = parseFloat(qtyInput.getAttribute('data-price'));
-    const subtotal = (price * currentQty).toFixed(2);
-    cartItem.querySelector('.subtotal-amount').textContent = `$${subtotal}`;
+    // Update the input value
+    const input = document.querySelector(`[data-item-id="${itemId}"] .qty-input`);
+    if (input) {
+        input.value = item.quantity;
+    }
+
+    // Update subtotal
+    updateItemSubtotal(itemId);
+    updateOrderSummary();
+    updateCartBadge();
 
     // Add animation
-    qtyInput.style.transform = 'scale(1.2)';
-    setTimeout(() => {
-        qtyInput.style.transform = 'scale(1)';
-    }, 200);
-
-    // Update cart summary
-    updateCartSummary();
-    
-    showNotification('Cart updated successfully', 'success');
+    const cartItem = document.querySelector(`[data-item-id="${itemId}"]`);
+    if (cartItem) {
+        cartItem.classList.add('pulse-animation');
+        setTimeout(() => cartItem.classList.remove('pulse-animation'), 300);
+    }
 }
 
-// Initialize quantity inputs
-function initializeQuantityInputs() {
-    const qtyInputs = document.querySelectorAll('.qty-input');
+// Update item subtotal
+function updateItemSubtotal(itemId) {
+    const item = cartData.items.find(i => i.id === itemId);
+    if (!item) return;
+
+    const subtotal = item.price * item.quantity;
+    const subtotalElement = document.querySelector(`[data-item-id="${itemId}"] .subtotal-amount`);
     
-    qtyInputs.forEach(input => {
-        input.addEventListener('change', function() {
-            let value = parseInt(this.value) || 1;
-            const min = parseInt(this.getAttribute('min')) || 1;
-            const max = parseInt(this.getAttribute('max')) || 10;
-            
-            if (value < min) value = min;
-            if (value > max) {
-                value = max;
-                showNotification('Maximum quantity reached', 'info');
-            }
-            
-            this.value = value;
-            
-            // Update cart data
-            const cartItem = this.closest('.cart-item');
-            const itemId = parseInt(cartItem.getAttribute('data-item-id'));
-            const item = cartData.items.find(i => i.id === itemId);
-            
-            if (item) {
-                item.quantity = value;
-            }
-            
-            // Update item subtotal
-            const price = parseFloat(this.getAttribute('data-price'));
-            const subtotal = (price * value).toFixed(2);
-            cartItem.querySelector('.subtotal-amount').textContent = `$${subtotal}`;
-            
-            updateCartSummary();
-        });
-    });
+    if (subtotalElement) {
+        subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+    }
 }
 
-// ===== REMOVE ITEM =====
+// Remove item from cart
 function removeItem(itemId) {
-    // Confirm removal
+    // Show confirmation
     if (!confirm('Are you sure you want to remove this item from your cart?')) {
         return;
     }
 
     const cartItem = document.querySelector(`[data-item-id="${itemId}"]`);
     
-    // Add removing animation
-    cartItem.classList.add('removing');
-    
-    setTimeout(() => {
-        // Remove from DOM
-        cartItem.remove();
+    if (cartItem) {
+        // Add removing animation
+        cartItem.classList.add('removing');
         
-        // Remove from cart data
-        cartData.items = cartData.items.filter(item => item.id !== itemId);
-        
-        // Update cart
-        updateCartDisplay();
-        updateCartSummary();
-        updateCartBadge();
-        
-        showNotification('Item removed from cart', 'success');
-        
-        // Check if cart is empty
-        if (cartData.items.length === 0) {
-            showEmptyCart();
-        }
-    }, 400);
-}
-
-// ===== MOVE TO WISHLIST =====
-function moveToWishlist(itemId) {
-    const item = cartData.items.find(i => i.id === itemId);
-    
-    if (item) {
-        // In real app, this would save to wishlist in backend
-        showNotification(`"${item.name}" moved to wishlist`, 'success');
-        
-        // Remove from cart
-        removeItem(itemId);
+        // Wait for animation to complete
+        setTimeout(() => {
+            // Remove from data
+            cartData.items = cartData.items.filter(i => i.id !== itemId);
+            
+            // Remove from DOM
+            cartItem.remove();
+            
+            // Update display
+            updateCartDisplay();
+            updateOrderSummary();
+            updateCartBadge();
+            
+            // Show notification
+            showNotification('Item removed from cart', 'success');
+        }, 400);
     }
 }
 
-// ===== CLEAR CART =====
+// Move to wishlist
+function moveToWishlist(itemId) {
+    const item = cartData.items.find(i => i.id === itemId);
+    
+    if (!item) return;
+    
+    // In a real app, you would add to wishlist here
+    console.log('Moving to wishlist:', item);
+    
+    // Remove from cart
+    removeItem(itemId);
+    
+    // Show notification
+    showNotification('Item moved to wishlist', 'success');
+}
+
+// Clear cart
 function clearCart() {
     if (!confirm('Are you sure you want to clear your entire cart?')) {
         return;
     }
+
+    cartData.items = [];
+    cartData.coupon = null;
+    cartData.discountAmount = 0;
+
+    updateCartDisplay();
+    updateOrderSummary();
+    updateCartBadge();
     
-    const cartItems = document.querySelectorAll('.cart-item');
-    
-    cartItems.forEach((item, index) => {
-        setTimeout(() => {
-            item.classList.add('removing');
-        }, index * 100);
-    });
-    
-    setTimeout(() => {
-        cartData.items = [];
-        showEmptyCart();
-        updateCartBadge();
-        showNotification('Cart cleared successfully', 'success');
-    }, cartItems.length * 100 + 400);
+    showNotification('Cart cleared', 'info');
 }
 
-// ===== SHOW EMPTY CART =====
-function showEmptyCart() {
-    document.getElementById('cartContent').style.display = 'none';
-    document.getElementById('emptyCartState').style.display = 'block';
-    
-    // Update cart badge
-    const cartBadge = document.getElementById('cartBadge');
-    if (cartBadge) {
-        cartBadge.textContent = '0';
-    }
-}
-
-// ===== UPDATE CART DISPLAY =====
-function updateCartDisplay() {
-    const itemCount = cartData.items.reduce((total, item) => total + item.quantity, 0);
-    
-    if (itemCount === 0) {
-        showEmptyCart();
-    } else {
-        document.getElementById('cartContent').style.display = 'block';
-        document.getElementById('emptyCartState').style.display = 'none';
-        
-        // Update item count
-        document.getElementById('itemCount').textContent = cartData.items.length;
-        document.getElementById('summaryItemCount').textContent = itemCount;
-    }
-}
-
-// ===== UPDATE CART SUMMARY =====
-function updateCartSummary() {
-    // Calculate subtotal
-    let subtotal = 0;
-    cartData.items.forEach(item => {
-        subtotal += item.price * item.quantity;
-    });
-    
-    // Calculate savings
-    let savings = 0;
-    cartData.items.forEach(item => {
-        if (item.originalPrice) {
-            savings += (item.originalPrice - item.price) * item.quantity;
-        }
-    });
-    
-    // Apply coupon discount
-    let discount = 0;
-    if (cartData.coupon) {
-        if (cartData.coupon.type === 'percentage') {
-            discount = (subtotal * cartData.coupon.value) / 100;
-        } else if (cartData.coupon.type === 'fixed') {
-            discount = cartData.coupon.value;
-        }
-    }
-    
-    // Calculate shipping
-    const shipping = subtotal >= 50 ? 0 : 0; // Free shipping on orders over $50
-    
-    // Calculate tax
-    const tax = (subtotal - discount) * cartData.taxRate;
-    
-    // Calculate total
-    const total = subtotal - discount + shipping + tax;
-    
-    // Update summary display
-    document.getElementById('summarySubtotal').textContent = `${subtotal.toFixed(2)}`;
-    document.getElementById('summaryShipping').textContent = shipping === 0 ? 'FREE' : `${shipping.toFixed(2)}`;
-    document.getElementById('summaryTax').textContent = `${tax.toFixed(2)}`;
-    document.getElementById('summaryTotal').textContent = `${total.toFixed(2)}`;
-    
-    // Update discount display
-    const discountItem = document.getElementById('discountItem');
-    if (discount > 0) {
-        discountItem.style.display = 'flex';
-        document.getElementById('summaryDiscount').textContent = `-${discount.toFixed(2)}`;
-    } else {
-        discountItem.style.display = 'none';
-    }
-    
-    // Update savings display
-    const totalSavings = savings + discount;
-    const savingsElement = document.getElementById('summarySavings');
-    if (totalSavings > 0) {
-        savingsElement.style.display = 'block';
-        savingsElement.querySelector('strong').textContent = `${totalSavings.toFixed(2)}`;
-    } else {
-        savingsElement.style.display = 'none';
-    }
-    
-    // Update item count
-    const itemCount = cartData.items.reduce((total, item) => total + item.quantity, 0);
-    document.getElementById('summaryItemCount').textContent = itemCount;
-}
-
-// ===== APPLY COUPON =====
+// Apply coupon
 function applyCoupon(event) {
     event.preventDefault();
     
-    const couponCode = document.getElementById('couponCode').value.trim().toUpperCase();
+    const couponInput = document.getElementById('couponCode');
+    const couponCode = couponInput.value.trim().toUpperCase();
     
     if (!couponCode) {
-        showNotification('Please enter a coupon code', 'error');
+        showNotification('Please enter a coupon code', 'warning');
         return;
     }
-    
-    // Simulate coupon validation (in real app, this would be an API call)
+
+    // Simulate coupon validation
     const validCoupons = {
-        'SAVE10': { type: 'percentage', value: 10, name: 'SAVE10' },
-        'SAVE20': { type: 'percentage', value: 20, name: 'SAVE20' },
-        'FLAT50': { type: 'fixed', value: 50, name: 'FLAT50' }
+        'SAVE10': { discount: 0.10, type: 'percentage' },
+        'SAVE20': { discount: 0.20, type: 'percentage' },
+        'FLAT50': { discount: 50, type: 'fixed' }
     };
-    
+
     if (validCoupons[couponCode]) {
-        cartData.coupon = validCoupons[couponCode];
+        cartData.coupon = {
+            code: couponCode,
+            ...validCoupons[couponCode]
+        };
         
         // Show applied coupon
-        document.getElementById('appliedCoupon').style.display = 'block';
         document.getElementById('couponName').textContent = couponCode;
-        document.getElementById('couponCode').value = '';
+        document.getElementById('appliedCoupon').style.display = 'block';
+        couponInput.value = '';
         
-        // Update summary
-        updateCartSummary();
-        
+        updateOrderSummary();
         showNotification('Coupon applied successfully!', 'success');
     } else {
         showNotification('Invalid coupon code', 'error');
     }
 }
 
-// ===== REMOVE COUPON =====
+// Remove coupon
 function removeCoupon() {
     cartData.coupon = null;
+    cartData.discountAmount = 0;
+    
     document.getElementById('appliedCoupon').style.display = 'none';
-    updateCartSummary();
+    updateOrderSummary();
+    
     showNotification('Coupon removed', 'info');
 }
 
-// ===== PROCEED TO CHECKOUT =====
-function proceedToCheckout() {
-    if (cartData.items.length === 0) {
-        showNotification('Your cart is empty', 'error');
-        return;
+// Update order summary
+function updateOrderSummary() {
+    // Calculate subtotal
+    const subtotal = cartData.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    // Calculate discount
+    let discount = 0;
+    if (cartData.coupon) {
+        if (cartData.coupon.type === 'percentage') {
+            discount = subtotal * cartData.coupon.discount;
+        } else {
+            discount = cartData.coupon.discount;
+        }
+    }
+    cartData.discountAmount = discount;
+    
+    // Calculate tax (10%)
+    const taxRate = 0.10;
+    const tax = (subtotal - discount) * taxRate;
+    
+    // Calculate total
+    const total = subtotal - discount + tax;
+    
+    // Calculate savings (original price - current price)
+    const savings = cartData.items.reduce((sum, item) => {
+        if (item.originalPrice) {
+            return sum + ((item.originalPrice - item.price) * item.quantity);
+        }
+        return sum;
+    }, 0) + discount;
+
+    // Update DOM
+    const totalItems = cartData.items.reduce((sum, item) => sum + item.quantity, 0);
+    
+    // Update item count
+    document.getElementById('itemCount').textContent = cartData.items.length;
+    document.getElementById('summaryItemCount').textContent = totalItems;
+    
+    // Update summary values
+    document.getElementById('summarySubtotal').textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById('summaryTax').textContent = `$${tax.toFixed(2)}`;
+    document.getElementById('summaryTotal').textContent = `$${total.toFixed(2)}`;
+    
+    // Update discount display
+    const discountItem = document.getElementById('discountItem');
+    if (discount > 0) {
+        discountItem.style.display = 'flex';
+        document.getElementById('summaryDiscount').textContent = `-$${discount.toFixed(2)}`;
+    } else {
+        discountItem.style.display = 'none';
     }
     
-    // Show loading state
-    const checkoutBtn = document.querySelector('.btn-checkout');
-    const originalText = checkoutBtn.innerHTML;
-    checkoutBtn.disabled = true;
-    checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+    // Update savings display
+    const savingsElement = document.getElementById('summarySavings');
+    if (savings > 0 && savingsElement) {
+        savingsElement.style.display = 'block';
+        savingsElement.querySelector('strong').textContent = `$${savings.toFixed(2)}`;
+    } else if (savingsElement) {
+        savingsElement.style.display = 'none';
+    }
+}
+
+// Update cart display (show/hide empty state)
+function updateCartDisplay() {
+    const emptyState = document.getElementById('emptyCartState');
+    const cartContent = document.getElementById('cartContent');
     
+    if (cartData.items.length === 0) {
+        emptyState.style.display = 'block';
+        cartContent.style.display = 'none';
+    } else {
+        emptyState.style.display = 'none';
+        cartContent.style.display = 'block';
+    }
+}
+
+// Update cart badge
+function updateCartBadge() {
+    const badge = document.getElementById('cartBadge');
+    if (badge) {
+        const totalItems = cartData.items.reduce((sum, item) => sum + item.quantity, 0);
+        badge.textContent = totalItems;
+        
+        if (totalItems === 0) {
+            badge.style.display = 'none';
+        } else {
+            badge.style.display = 'flex';
+        }
+    }
+}
+
+// Proceed to checkout
+function proceedToCheckout() {
+    if (cartData.items.length === 0) {
+        showNotification('Your cart is empty', 'warning');
+        return;
+    }
+
+    // Add loading state to button
+    const btn = event.target;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+    btn.disabled = true;
+
     // Simulate processing
     setTimeout(() => {
-        // In real app, this would save cart and redirect to checkout
+        // In a real app, redirect to checkout page
         window.location.href = 'checkout.html';
     }, 1000);
 }
 
-// ===== UPDATE CART BADGE =====
-function updateCartBadge() {
-    const cartBadge = document.getElementById('cartBadge');
-    if (cartBadge) {
-        const itemCount = cartData.items.reduce((total, item) => total + item.quantity, 0);
-        cartBadge.textContent = itemCount;
-        
-        // Pulse animation
-        cartBadge.style.animation = 'none';
-        setTimeout(() => {
-            cartBadge.style.animation = 'pulse 0.5s ease';
-        }, 10);
-    }
-}
-
-// ===== NOTIFICATION SYSTEM =====
-function showNotification(message, type = 'success') {
+// Show notification
+function showNotification(message, type = 'info') {
     // Create notification element
     const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    
-    const bgColor = type === 'success' ? '#10B981' : 
-                    type === 'error' ? '#FF6B6B' : 
-                    type === 'info' ? '#3B82F6' : '#FFA500';
-    
+    notification.className = `alert alert-${type} notification-toast`;
     notification.style.cssText = `
         position: fixed;
         top: 100px;
         right: 20px;
-        background: ${bgColor};
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        min-width: 300px;
-        max-width: 400px;
-        transform: translateX(400px);
-        transition: transform 0.3s ease;
-        font-size: 14px;
-        font-weight: 500;
         z-index: 9999;
+        min-width: 300px;
+        animation: slideInRight 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
     `;
     
-    const icon = type === 'success' ? 'fa-check-circle' : 
-                 type === 'error' ? 'fa-exclamation-circle' : 
-                 type === 'info' ? 'fa-info-circle' : 'fa-exclamation-triangle';
+    // Set icon based on type
+    let icon = 'fa-info-circle';
+    if (type === 'success') icon = 'fa-check-circle';
+    if (type === 'error') icon = 'fa-exclamation-circle';
+    if (type === 'warning') icon = 'fa-exclamation-triangle';
     
     notification.innerHTML = `
-        <i class="fas ${icon}"></i>
-        <span>${message}</span>
-        <button onclick="this.parentElement.remove()" style="background: none; border: none; color: white; cursor: pointer; margin-left: auto; font-size: 16px;">
-            <i class="fas fa-times"></i>
-        </button>
+        <i class="fas ${icon} me-2"></i>${message}
     `;
     
     document.body.appendChild(notification);
     
-    // Trigger animation
+    // Remove after 3 seconds
     setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-    }, 100);
-    
-    // Auto remove after 3 seconds
-    setTimeout(() => {
-        notification.style.transform = 'translateX(400px)';
-        setTimeout(() => {
-            notification.remove();
-        }, 300);
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
-// ===== ADD TO CART (FOR RECOMMENDED PRODUCTS) =====
-document.querySelectorAll('.recommended-section .add-to-cart').forEach(button => {
-    button.addEventListener('click', function(e) {
-        e.preventDefault();
+// Handle quantity input change
+document.addEventListener('input', function(e) {
+    if (e.target.classList.contains('qty-input')) {
+        const itemId = parseInt(e.target.closest('[data-item-id]').dataset.itemId);
+        const newQuantity = parseInt(e.target.value);
         
-        const productCard = this.closest('.product-card');
-        const productName = productCard.querySelector('.product-title').textContent;
-        
-        // Button animation
-        const originalText = this.innerHTML;
-        this.innerHTML = '<i class="fas fa-check me-1"></i> Added!';
-        this.classList.remove('btn-primary');
-        this.classList.add('btn-success');
-        this.disabled = true;
-        
-        // Update cart badge
-        updateCartBadge();
-        
-        showNotification(`"${productName}" added to cart!`, 'success');
-        
-        // Reset button after delay
-        setTimeout(() => {
-            this.innerHTML = originalText;
-            this.classList.remove('btn-success');
-            this.classList.add('btn-primary');
-            this.disabled = false;
-        }, 2000);
-    });
-});
-
-// ===== SAVE CART TO LOCALSTORAGE (OPTIONAL) =====
-function saveCartToStorage() {
-    try {
-        localStorage.setItem('elegantShopCart', JSON.stringify(cartData));
-    } catch (e) {
-        console.error('Failed to save cart to localStorage:', e);
-    }
-}
-
-// ===== LOAD CART FROM LOCALSTORAGE (OPTIONAL) =====
-function loadCartFromStorage() {
-    try {
-        const savedCart = localStorage.getItem('elegantShopCart');
-        if (savedCart) {
-            cartData = JSON.parse(savedCart);
-            updateCartDisplay();
-            updateCartSummary();
-        }
-    } catch (e) {
-        console.error('Failed to load cart from localStorage:', e);
-    }
-}
-
-// ===== AUTO-SAVE CART ON CHANGES =====
-// Uncomment to enable auto-save
-// setInterval(saveCartToStorage, 5000); // Save every 5 seconds
-
-// ===== KEYBOARD SHORTCUTS =====
-document.addEventListener('keydown', function(e) {
-    // Press 'C' to go to checkout
-    if (e.key === 'c' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
-        proceedToCheckout();
-    }
-    
-    // Press 'Escape' to close notifications
-    if (e.key === 'Escape') {
-        document.querySelectorAll('.notification').forEach(n => n.remove());
-    }
-});
-
-// ===== STICKY SUMMARY ON SCROLL =====
-window.addEventListener('scroll', function() {
-    const summary = document.querySelector('.sticky-summary');
-    if (summary && window.innerWidth > 991) {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const footer = document.querySelector('.footer');
-        const footerTop = footer.offsetTop;
-        const summaryHeight = summary.offsetHeight;
-        
-        if (scrollTop + summaryHeight + 120 > footerTop) {
-            summary.style.position = 'absolute';
-            summary.style.top = (footerTop - summaryHeight - 120) + 'px';
+        if (newQuantity > 0 && newQuantity <= 10) {
+            const item = cartData.items.find(i => i.id === itemId);
+            if (item) {
+                item.quantity = newQuantity;
+                updateItemSubtotal(itemId);
+                updateOrderSummary();
+                updateCartBadge();
+            }
         } else {
-            summary.style.position = 'sticky';
-            summary.style.top = '120px';
+            // Reset to current value
+            const item = cartData.items.find(i => i.id === itemId);
+            if (item) {
+                e.target.value = item.quantity;
+            }
         }
     }
 });
 
-// ===== HANDLE BACK BUTTON =====
-window.addEventListener('popstate', function() {
-    // Save cart state when user navigates away
-    saveCartToStorage();
-});
-
-// ===== PAGE VISIBILITY API (SAVE WHEN TAB BECOMES HIDDEN) =====
-document.addEventListener('visibilitychange', function() {
-    if (document.hidden) {
-        saveCartToStorage();
+// Add ripple effect to buttons
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('btn-ripple') || e.target.closest('.btn-ripple')) {
+        const button = e.target.classList.contains('btn-ripple') ? e.target : e.target.closest('.btn-ripple');
+        const ripple = document.createElement('span');
+        const rect = button.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            left: ${x}px;
+            top: ${y}px;
+            animation: ripple 0.6s ease-out;
+            pointer-events: none;
+        `;
+        
+        button.style.position = 'relative';
+        button.style.overflow = 'hidden';
+        button.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
     }
 });
 
-// ===== LOG CART ACTIVITY (FOR DEBUGGING) =====
-console.log('Cart initialized with', cartData.items.length, 'items');
+// Save cart to localStorage
+function saveCart() {
+    localStorage.setItem('elegantshop_cart', JSON.stringify(cartData));
+}
 
-// ===== END OF CART SCRIPTS =====
+// Load cart from localStorage
+function loadCart() {
+    const savedCart = localStorage.getItem('elegantshop_cart');
+    if (savedCart) {
+        try {
+            cartData = JSON.parse(savedCart);
+        } catch (e) {
+            console.error('Error loading cart:', e);
+        }
+    }
+}
+
+// Auto-save cart on changes
+window.addEventListener('beforeunload', saveCart);
+
+// Load cart on page load
+loadCart();
